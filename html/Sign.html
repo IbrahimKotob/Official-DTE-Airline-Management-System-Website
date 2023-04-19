@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign Up Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    
+    
+    <div class="signupFrm">
+        <form action="" class="form">
+          <h1 class="title">Sign up</h1>
+    
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="a">
+            <label for="" class="label">Email</label>
+          </div>
+    
+         
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="a">
+            <label for="" class="label">FirstName</label>
+          </div>
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="a">
+            <label for="" class="label">LastName</label>
+          </div> 
+          <div class="inputContainer">
+                    <input type="text" class="input" placeholder="a" name="Phone Number">
+                    <label for="Phone Number" class="label">Phone Number</label>
+                  </div>
+    
+          <input type="radio" name="sex" checked id="r-male" value="m">
+          <label for="r-male">Male</label>
+          <input type="radio" name="sex" id="r-female" value="f">
+          <label for="r-female">Female</label>
+        <br><br>
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="a">
+            <label for="" class="label">Password</label>
+          </div>
+         
+          
+    
+          <div class="inputContainer">
+            <input type="text" class="input" placeholder="a">
+            <label for="" class="label">Confirm Password</label>
+          </div>
+          
+            
+                  <label for="date">Birthdate</label>
+
+<span id="date-format"></span>
+<input type="date" id="date" aria-describedby="date-format" min="1930-03-01" max="2024-01-01" />
+         <br> <br>
+          <label for="sel-language">Language</label>
+                <select name="language" id="sel-language" class="round">
+                    <option value="-1">                   </option>
+                    <option value="en">English</option>
+                    <option value="ar">Arabic</option>
+                </select>
+              
+                <br>
+                <br>
+               
+               
+                
+         
+            
+                
+          <input type="submit"  class ="submitBtn"id="submitBtn" value="Sign up"onclick="SignUp()">
+        </form>
+
+      </div>
+      <script>
+         document.getElementById("submitBtn").submit();
+      </script>
+      
+</body>
+</html>
