@@ -14,6 +14,61 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
 
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Flights</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #9370DB;
+            color: #fff;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .flight-card {
+            background-color: #6A5ACD;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .flight-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .flight-card p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+		.flight-card 
+
+		.flight-card:hover{
+			display: none;
+		}
+    </style>
+
 </head>
 <body>
 	<div class="header_section">
@@ -52,5 +107,34 @@
 			</nav>
 		</div>
 	</div>
+	<header>
+        <header>
+			<h1 style="color: white;">Available Flights</h1>
+			<h2 style="color: white;">Based on your preferences</h2>
+		</header>
+		<div class="container">
+			<div class="flight-card">
+				<h3>Flight 1</h3>
+				<p>Departure: New York (JFK) - 10:00 AM</p>
+				<p>Arrival: Los Angeles (LAX) - 1:00 PM</p>
+				<p>Duration: 5 hours</p>
+				<p>Price: $350</p>
+			</div>
+			<div class="flight-card">
+				<h3>Flight 2</h3>
+				<p>Departure: New York (JFK) - 2:00 PM</p>
+				<p>Arrival: Los Angeles (LAX) - 5:00 PM</p>
+				<p>Duration: 5 hours</p>
+				<p>Price: $400</p>
+			</div>
+			<div class="flight-card">
+				<h3>Flight 3</h3>
+				<p>Departure: New York (JFK) - 6:00 PM</p>
+				<p>Arrival: Los Angeles (LAX) - 9:00 PM</p>
+				<p>Duration: 5 hours</p>
+				<p>Price: $380</p>
+			</div>
+			<!-- Add more flight cards as needed -->
+		</div>
 </body>
 </html>
