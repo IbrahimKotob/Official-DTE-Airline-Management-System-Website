@@ -1,0 +1,35 @@
+<!-- Confirmation.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Confirmation</title>
+</head>
+<body>
+    <h1>Booking Confirmation</h1>
+    <p>Thank you for booking with us!</p>
+    <table>
+        <tr>
+            <th>Booking ID</th>
+            <th>Flight Number</th>
+            <th>Departure</th>
+            <th>Destination</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Passengers</th>
+            <th>Preferences</th>
+        </tr>
+        <tr>
+            <td><?= $booking['id'] ?></td>
+            <td><?= $booking['flightNumber'] ?></td>
+            <td><?= $booking['departure'] ?></td>
+            <td><?= $booking['destination'] ?></td>
+            <td><?= $booking['departureTime'] ?></td>
+            <td><?= $booking['arrivalTime'] ?></td>
+            <td><?= $booking['passengers'] ?></td>
+            <td><?= $booking['preferences']
+            </td>
+          </tr>
+      </table>
+    </body>
+    </html>
+    

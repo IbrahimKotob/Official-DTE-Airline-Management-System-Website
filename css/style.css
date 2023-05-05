@@ -240,9 +240,14 @@ button {
 .banner_section{
      width: 100%;
      float: left;
-     background-image: url(../images/banner-bg.png);
+     background-image: url(../images/umbreon-night.gif);
      height: auto;
      padding-bottom: 90px;
+     background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	animation: animateBackground 20s linear infinite;
 }
 
 .banner_taital{
@@ -253,7 +258,13 @@ button {
      text-align: center;
      padding-bottom: 40px;
      font-family: Baloo Chettan;
+     display: inline-block;
+  margin: 0 0.5rem;
+
+  animation: tada; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 2s; /* don't forget to set a duration! */
 }
+
 
 
 .free_text {
@@ -300,13 +311,7 @@ button {
     top: -35px;
 }
 
-.service_section.layout_padding.margin_0 {
-    margin: 0px;
-}
 
-.footer_section.layout_padding.margin_0 {
-    margin: 0px;
-}
 
 .about_section{
      width: 100%;
@@ -539,20 +544,6 @@ button {
     padding-top: 40px;
 }
 
-.footer_section{
-     width: 100%;
-     float: left;
-     background-image: url(../images/footer-bg.png);
-     height: auto;
-     padding-bottom: 50px;
-     margin-top: 90px;
-}
-
-.footer_main{
-     width: 70%;
-     margin: 0 auto;
-     text-align: center;
-}
 
 .input-group {
     height: 50px;
@@ -647,3 +638,55 @@ input.form-control::placeholder {
     width: 5%;
     float: left;
 }
+footer {
+     background-color:rgb(255, 255, 255);
+     color: #000000;
+  padding-right: 25%;
+    width: 100%;
+    padding-left: 25%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: animateBackground 20s linear infinite;
+   }
+   @keyframes animateBackground {
+     0% { background-position: 0 0; }
+     50% { background-position: 100% 0; }
+     100% { background-position: 0 0; }
+   }
+   .customer-support {
+     background-color: #f2f2f2;
+    color: #fcf8fe;
+     border-radius: 5px;
+     margin-bottom: 20px;
+     width: 100%;
+   }
+   
+   .customer-support h3 {
+     font-size: 24px;
+     margin-bottom: 10px;
+   }
+   
+   .customer-support p {
+     font-size: 16px;
+     line-height: 1.5;
+     margin-bottom: 10px;
+   }
+   
+   .customer-support ul {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+   
+   .customer-support li {
+     font-size: 16px;
+     line-height: 1.5;
+     margin-bottom: 5px;
+   }
+   
+   .customer-support li strong {
+     font-weight: bold;
+   }
+   

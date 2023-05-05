@@ -99,13 +99,7 @@
 					<li class="nav-item">
 					  <a class="nav-link" href="Booking.html">Book a Flight</a>
 					</li>
-					<li class="nav-item">
-					  <a class="nav-link" href="Pref.html">Passenger Preferences</a>
-					</li>
-					<li class="nav-item">
-					  <a class="nav-link" href="index.html">Customer Suppport</a>
-					</li>
-					<li class="nav-item">
+					
 					  <a class="nav-link" href="Loyalty.html">Loyalty Program</a>
 					</li>
 					<li class="nav-item active">
@@ -119,31 +113,22 @@
 	<header>
         <h1 style="color: white;">Book your flight today!</h1>
     </header>
-    <div class="container">
-        <form>
-            <label for="from">From:</label>
-            <input type="text" id="from" name="from" placeholder="City or airport" required>
+		<div class="container">
+			<form action="search_flights.php" method="post">
+					<label for="from">From:</label>
+					<input type="text" id="from" name="from" placeholder="City or airport" required>
 
-            <label for="to">To:</label>
-            <input type="text" id="to" name="to" placeholder="City or airport" required>
+					<label for="to">To:</label>
+					<input type="text" id="to" name="to" placeholder="City or airport" required>
 
-            <label for="departure">Departure Date:</label>
-            <input type="date" id="departure" name="departure" required>
+					<label for="departure">Departure Date:</label>
+					<input type="date" id="departure" name="departure" required>
 
-            <label for="return">Return Date:</label>
-            <input type="date" id="return" name="return" required>
+					<label for="return">Return Date:</label>
+					<input type="date" id="return" name="return" required>
 
-            <label for="passengers">Number of Passengers:</label>
-            <select id="passengers" name="passengers" required>
-                <option value="">Select...</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-
-            <button type="submit"><a href="Pref.html" style="color: white;">Search Flights</a></button>
-        </form>
+					<button type="submit" name="search_flights">Search Flights</button>
+			</form>
     </div>
 </body>
 </html>

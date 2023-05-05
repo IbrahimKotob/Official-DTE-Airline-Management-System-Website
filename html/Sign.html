@@ -2,83 +2,86 @@
 <html lang="en">
 <head>
     <title>Sign Up Page</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link rel="stylesheet" href="../css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/styles.css">
+    
 </head>
-<body>
-    
-    
-    <div class="signupFrm">
-        <form action="" class="form">
-          <h1 class="title">Sign up</h1>
-    
-          <div class="inputContainer">
-            <input type="text" class="input" placeholder="a">
-            <label for="" class="label">Email</label>
-          </div>
-    
-         
-          <div class="inputContainer">
-            <input type="text" class="input" placeholder="a">
-            <label for="" class="label">FirstName</label>
-          </div>
-          <div class="inputContainer">
-            <input type="text" class="input" placeholder="a">
-            <label for="" class="label">LastName</label>
-          </div> 
-          <div class="inputContainer">
-                    <input type="text" class="input" placeholder="a" name="Phone Number">
-                    <label for="Phone Number" class="label">Phone Number</label>
-                  </div>
-    
-          <input type="radio" name="sex" checked id="r-male" value="m">
-          <label for="r-male">Male</label>
-          <input type="radio" name="sex" id="r-female" value="f">
-          <label for="r-female">Female</label>
-        <br><br>
-          <div class="inputContainer">
-            <input type="text" class="input" placeholder="a">
-            <label for="" class="label">Password</label>
-          </div>
-         
+<body style="background-image: url(../images/airplane-pastel-purple-background-3d-render_576429-695.png);">
+    <div style="margin: 70px;" class="signupFrm">
+      <form action="signup.php" method="POST" class="form">
+            <h1 class="title" style="margin: 50px;">Sign up</h1>
           
-    
-          <div class="inputContainer">
-            <input type="text" class="input" placeholder="a">
-            <label for="" class="label">Confirm Password</label>
-          </div>
-          
-            
-                  <label for="date">Birthdate</label>
+            <div class="inputContainer">
+                <input type="text" class="input" name="email" required>
+                <label for="email" class="label">Email</label>
+            </div>
 
-<span id="date-format"></span>
-<input type="date" id="date" aria-describedby="date-format" min="1930-03-01" max="2024-01-01" />
-         <br> <br>
-          <label for="sel-language">Language</label>
-                <select name="language" id="sel-language" class="round">
-                    <option value="-1">                   </option>
-                    <option value="en">English</option>
-                    <option value="ar">Arabic</option>
-                </select>
-              
-                <br>
-                <br>
-               
-               
-                
-         
-            
-                
-          <input type="submit"  class ="submitBtn"id="submitBtn" value="Sign up"onclick="SignUp()">
+            <div class="inputContainer">
+                <input type="text" class="input" name="firstName" required>
+                <label for="firstName" class="label">First Name</label>
+            </div>
+
+            <div class="inputContainer">
+                <input type="text" class="input" name="lastName" required>
+                <label for="lastName" class="label">Last Name</label>
+            </div>
+
+            <div class="inputContainer">
+                <input type="text" class="input" name="username" required>
+                <label for="username" class="label">Username</label>
+            </div>
+
+            <div class="inputContainer">
+                <input type="password" class="input" name="password" required>
+                <label for="password" class="label">Password</label>
+            </div>
+
+            <div class="inputContainer">
+                <input type="password" class="input" name="confirmPassword" required>
+                <label for="confirmPassword" class="label">Confirm Password</label>
+            </div>
+
+            <div class="inputContainer">
+                <input type="text" class="input" name="address" required>
+                <label for="address" class="label">Address</label>
+            </div>
+
+            <div class="inputContainer">
+                <input type="text" class="input" name="phone" required>
+                <label for="phone" class="label">Phone Number</label>
+            </div>
+
+            <div class="inputContainer">
+                <input type="text" class="input" name="city" required>
+                <label for="city" class="label">City</label>
+            </div>
+
+            <div class="inputContainer">
+                <input type="text" class="input" name="country" required>
+                <label for="country" class="label">Country</label>
+            </div>
+
+            <div class="inputContainer">
+                <input type="text" class="input" name="postalCode" required>
+                <label for="postalCode" class="label">Postal Code</label>
+            </div>
+
+            <div class="inputContainer">
+                <label for="specialNeeds" class="label">Special Needs</label><br>
+                <input type="checkbox" class="input" name="specialNeeds" id="specialNeeds">
+            </div>
+            <label for="birthdate">Birthdate</label>
+            <input type="date" name="birthdate" id="birthdate" aria-describedby="date-format" min="1930-03-01" max="2024-01-01" required />
+            <br><br>
+
+            <input type="submit" class="submitBtn" id="submitBtn" value="Sign up">
         </form>
+    </div>
+<script>
+ document.getElementById("submitBtn").submit();
+</script>
 
-      </div>
-      <script>
-         document.getElementById("submitBtn").submit();
-      </script>
-      
 </body>
 </html>
