@@ -43,6 +43,7 @@ body {
      line-height: 1.80857;
      font-weight: normal;
      overflow-x: hidden;
+     margin: 0%;
 }
 
 a {
@@ -242,7 +243,7 @@ button {
      float: left;
      background-image: url(../images/umbreon-night.gif);
      height: auto;
-     padding-bottom: 90px;
+    padding: 15%;
      background-attachment: fixed;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -286,6 +287,7 @@ button {
     width: 100%;
     float: left;
     margin-top: 50px;
+   
 }
 
 .read_text a{
@@ -296,6 +298,7 @@ button {
     color: #9a26e2;
     background-color: #ffffff;
     padding: 10px 0px;
+    border-radius: 30px;
 }
 
 .read_text a:hover {
@@ -689,4 +692,98 @@ footer {
    .customer-support li strong {
      font-weight: bold;
    }
-   
+   .container-fluid {
+     width: 100%;
+padding-right: 0px;
+padding-left: 0px;
+margin-right: auto;
+margin-left: auto;
+   }
+    nav {
+     background-color: #4c0082e9;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  nav li {
+    float: left;
+  }
+  
+  nav li a {
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  nav li a:hover {
+    background-color: #ddd;
+    color: #4b0082;
+  }
+
+ 
+  @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+  .snip1143 {
+    font-family: 'Raleway', Arial, sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 50;
+    padding: 2%;
+  }
+  .snip1143 * {
+    box-sizing: border-box;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+  }
+  .snip1143 li {
+    display: inline-block;
+    list-style: outside none none;
+    margin: 0 1.5em ;
+    overflow: hidden;
+  }
+  .snip1143 a {
+    padding: 0.3em 0;
+    color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    display: inline-block;
+    letter-spacing: 1px;
+    margin: 0;
+    text-decoration: none;
+  }
+  .snip1143 a:before,
+  .snip1143 a:after {
+    position: absolute;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+  }
+  .snip1143 a:before {
+    top: 100%;
+    display: block;
+    height: 3px;
+    width: 100%;
+    content: "";
+    background-color: #fcfcfc;
+  }
+  .snip1143 a:after {
+    padding: 0.3em 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    content: attr(data-hover);
+    color: white;
+    white-space: nowrap;
+  }
+  .snip1143 li:hover a,
+  .snip1143 .current a {
+    transform: translateY(-100%);
+  }

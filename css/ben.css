@@ -151,8 +151,16 @@ color: #fff;
   }
   .ana{
 	text-align: center;
-	color: #ccc;
-	background-color:#4b0082;
+	color: #440072e4;
+	font-size: 300%;
 	animation: swing; /* referring directly to the animation's @keyframe declaration */
   animation-duration: 2s; /* don't forget to set a duration! */
+  }
+   
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #ddd;
   }
