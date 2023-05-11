@@ -641,64 +641,8 @@ input.form-control::placeholder {
     width: 5%;
     float: left;
 }
-footer {
-     background-color:rgb(255, 255, 255);
-     color: #000000;
-  padding-right: 25%;
-    width: 100%;
-    padding-left: 25%;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    animation: animateBackground 20s linear infinite;
-   }
-   @keyframes animateBackground {
-     0% { background-position: 0 0; }
-     50% { background-position: 100% 0; }
-     100% { background-position: 0 0; }
-   }
-   .customer-support {
-     background-color: #f2f2f2;
-    color: #fcf8fe;
-     border-radius: 5px;
-     margin-bottom: 20px;
-     width: 100%;
-   }
-   
-   .customer-support h3 {
-     font-size: 24px;
-     margin-bottom: 10px;
-   }
-   
-   .customer-support p {
-     font-size: 16px;
-     line-height: 1.5;
-     margin-bottom: 10px;
-   }
-   
-   .customer-support ul {
-     list-style: none;
-     padding: 0;
-     margin: 0;
-   }
-   
-   .customer-support li {
-     font-size: 16px;
-     line-height: 1.5;
-     margin-bottom: 5px;
-   }
-   
-   .customer-support li strong {
-     font-weight: bold;
-   }
-   .container-fluid {
-     width: 100%;
-padding-right: 0px;
-padding-left: 0px;
-margin-right: auto;
-margin-left: auto;
-   }
+
+
     nav {
      background-color: #4c0082e9;
     display: flex;
@@ -787,3 +731,68 @@ margin-left: auto;
   .snip1143 .current a {
     transform: translateY(-100%);
   }
+  /*new*/
+  footer {
+     background-color: #4c0082e9;
+  padding: 40px 0;
+  margin-top: 80px;
+ 
+}
+
+footer h4 {
+  font-size: 20px;
+  
+  color: white;
+  margin-top: 100px;
+}
+
+footer p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  color: white;
+}
+
+footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+footer ul li {
+  margin-bottom: 10px;
+}
+
+footer ul li a {
+     color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+footer ul li a:hover {
+  color: #f37121;
+}
+
+@media (max-width: 767px) {
+  footer {
+    padding: 20px 0;
+    margin-top: 40px;
+
+  }
+  
+  footer h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    margin-top: 100px;
+  }
+  
+  footer p {
+    font-size: 14px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  
+  footer ul li a {
+    font-size: 14px;
+  }
+}

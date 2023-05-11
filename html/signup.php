@@ -58,31 +58,35 @@ function InsertUserToDBfromObject($user) {
 
     // Check if specialNeeds is true or false
     $specialNeedsValue = $user->specialNeeds ? 1 : 0;
-// Insert data into the Person table
-$queryPerson = "INSERT INTO Person (name, address, email, phone)
-VALUES ('$user->firstName $user->lastName', '$user->address', '$user->email', '$user->phone')";
 
-$db->query($queryPerson);
+    // Insert data into the Person table
+    $queryPerson = "INSERT INTO Person (name, address, email, phone)
+    VALUES ('$user->firstName $user->lastName', '$user->address', '$user->email', '$user->phone')";
 
-// Get the last inserted personID
-$personID = $db->lastInsertId();
+    $db->query($queryPerson);
 
-// Insert data into the Account table
-$queryAccount = "INSERT INTO Account (personID, password)
-VALUES ('$personID', '$hashedPassword')";
+    // Get the last inserted personID
+    $personID = $db->lastInsertId();
 
-$db->query($queryAccount);
+    // Insert data into the Account table
+    $queryAccount = "INSERT INTO Account (personID, password, `User name`)
+    VALUES ('$personID', '$hashedPassword', '$user->username')";
 
-// Insert data into the Customer table
-$queryCustomer = "INSERT INTO Customer (FirstName, LastName, DOB, Age, Email, Username, Password, Address, PhoneNumber, City, Country, PostalCode, SpecialNeeds)
-VALUES ('$user->firstName', '$user->lastName', '$formattedBirthdate', '$age', '$user->email', '$user->username', '$hashedPassword', '$user->address', '$user->phone', '$user->city', '$user->country', '$user->postalCode', '$specialNeedsValue')";
+    $db->query($queryAccount);
 
-$stmt=$db->query($queryCustomer);
+    // Get the last inserted accountID
+    $accountID = $db->lastInsertId();
 
-header("Location: Booking.html");
-}
+    // Insert data into the Customer table
+    $queryCustomer = "INSERT INTO Customer (accountID, FirstName, LastName, DOB, Age, Email, Password, Address, PhoneNumber, City, Country, PostalCode, SpecialNeeds)
+    VALUES ('$accountID', '$user->firstName', '$user->lastName', '$formattedBirthdate', '$age', '$user->email', '$hashedPassword', '$user->address', '$user->phone', '$user->city', '$user->country', '$user->postalCode', '$specialNeedsValue')";
 
-function InsertUserToDBfromArray($user){
+    $stmt= $db->query($queryCustomer);
+
+    header("Location: login.php");
+    }
+    
+    function InsertUserToDBfromArray($user){
     print_r($user);
-}
-?>
+    }
+    ?>
