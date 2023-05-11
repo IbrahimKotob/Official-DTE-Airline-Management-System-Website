@@ -31,7 +31,7 @@
 				  <li>
                      
                           <?php
-                              $display_name = $_SESSION['email_or_username'];
+                              $display_name = $_SESSION['email_or_username'];//showing the username once a person has logged in
                               if (strpos($display_name, '@') !== false) {
                                   $display_name = explode('@', $display_name)[0];
                               }

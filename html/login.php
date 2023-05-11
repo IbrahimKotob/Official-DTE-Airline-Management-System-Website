@@ -84,7 +84,7 @@ if (password_verify($password, $account['password'])) {
 	<div class="header_section">
 		
     <nav class="snip1143">
-      <ul>
+      <ul><!-- menu -->
         <li><a href="index.php" data-hover="Home">Home</a></li>
         <li><a href="schedule.php" data-hover="Schedule">Schedule</a></li>
         <li><a href="Booking.html" data-hover="Booking">Book A Flight</a></li>
@@ -95,7 +95,7 @@ if (password_verify($password, $account['password'])) {
   </div>
 </div>
 <div class="container">
-    <div class="screen">
+    <div class="screen"><!-- form to input the login credentials -->
         <div class="screen__content">
             <form class="login" action="login.php" method="POST">
                 <div class="login__field">
@@ -117,7 +117,7 @@ if (password_verify($password, $account['password'])) {
 
                     <p style="color: rgb(1, 27, 49);">Don't have an account? then</p>
                     <a class="button Signin__submit" href="Sign.html">
-                        <span class="button__text_signin">SignUp Now</span>
+                        <span class="button__text_signin">SignUp Now</span><!-- if the user doesn't have an account, they're able to use this button to be redirected to the signup page to create a new account -->
                         <i class="button__icon fas fa-chevron-right"></i>
                     </a>
                 </form>

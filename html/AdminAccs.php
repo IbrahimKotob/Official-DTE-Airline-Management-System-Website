@@ -8,7 +8,7 @@ function VarExist($var) {
 }
 
 $user = new stdClass();
-
+//creating the variables for user
 $user->firstName = VarExist($_POST["firstName"]);
 $user->lastName = VarExist($_POST["lastName"]);
 $user->email = VarExist($_POST["email"]);

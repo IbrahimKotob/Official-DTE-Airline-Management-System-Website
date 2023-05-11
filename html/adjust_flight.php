@@ -1,6 +1,4 @@
-<?php
-// Assuming you're posting 'flightID', 'customerID', and 'meal' to this script
-
+<?php //Adjusting flight details in the schedule
 // Check if the necessary POST parameters are set
 if (isset($_POST['flightID']) && isset($_POST['customerID']) && isset($_POST['meal'])) {
     // Database connection parameters

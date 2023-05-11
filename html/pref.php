@@ -61,6 +61,7 @@ if (isset($_SESSION['email_or_username'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Flights</title>
+    <!-- styling the page and the pop-up menu allowing for further flight customization -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -153,7 +154,7 @@ if (isset($_SESSION['email_or_username'])) {
             </nav>
         </div>
     </div>
-    <header>
+    <header><!-- form for the pop-up menu allowing the user to further customize their flight -->
         <div>
             <div class="modal-content">
                 <h2>Passenger Preferences</h2>
@@ -185,7 +186,7 @@ if (isset($_SESSION['email_or_username'])) {
                     <br><br>
                     <input type="hidden" name="flightID" id="flightID" value="">
 
-                    <input type="submit" value="Book Now!">
+                    <input type="submit" value="Book Now!"><!-- book now button to finalize the booking process with the currently selected details -->
                 </form>
             </div>
         </div>

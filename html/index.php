@@ -1,4 +1,4 @@
-<?php
+<?php //main page upon entering the website
 session_start();
 if (isset($_SESSION['email_or_username'])) {
     header("Location: logged.php");
@@ -11,7 +11,7 @@ if (isset($_SESSION['email_or_username'])) {
 
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 
-<link rel="stylesheet" type="text/css" href="../css/style.css">
+<link rel="stylesheet" type="text/css" href="../css/style.css"><!-- linking style sheets -->
 
 
 <link rel="icon" href="../images/fevicon.png" type="image/gif" />
@@ -26,7 +26,7 @@ if (isset($_SESSION['email_or_username'])) {
 	<div class="header_section">
 		
 			<nav class="snip1143">
-				<ul>
+				<ul><!-- menu -->
 				  <li><a href="index.php" data-hover="Home">Home</a></li>
 				  <li><a href="Login.php" data-hover="Schedule">Schedule</a></li>
 				  <li><a href="Booking.html" data-hover="Booking">Book A Flight</a></li>
@@ -42,7 +42,7 @@ if (isset($_SESSION['email_or_username'])) {
 		<h1 class="banner_taital">SkyTrack</h1>
 		<h2 class="free_text">Your high-flying travel companion. Safe, comfortable, and efficient air travel, from take off to landing. </h2>
 			  <div class="read_bt">
-				<div class="read_text"><a href="ReadMore.html">Read More</a></div>
+				<div class="read_text"><a href="ReadMore.html">Read More</a></div><!-- read more page link -->
 			  </div>
 	  </div>
     

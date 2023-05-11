@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION['email_or_username'])) {
     $_SESSION['warning'] = "Please log in to book a flight";
-    header("Location: login.html"); // replace with your login page
+    header("Location: login.html");
     exit;
 }
 
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute();
 
             // Calculate points earned from this flight and update customer's points
-            $pointsEarned = $price / 10;  // 1 point for every $10 spent, adjust as needed
+            $pointsEarned = $price / 10;  // 1 point for every $10 spent
             $newPoints = $customer['Points'] + $pointsEarned;
             $stmt = $db->prepare("UPDATE Customer SET Points = :newPoints WHERE CustomerID = :customerID");
             $stmt->bindParam(':newPoints', $newPoints, PDO::PARAM_INT);
@@ -77,21 +77,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute();
 
             $_SESSION['success'] = "Flight booked successfully!";
-            header("Location: schedule.php"); // replace with your confirmation page
+            header("Location: schedule.php"); // In case of successfully booking, Redirect to Schedule Page
             exit;
         } else {
             $_SESSION['error'] = "No available seats matching your preferences. Please select different options.";
-            header("Location: pref.php"); // replace with your booking page
+            header("Location: pref.php"); // Error handling , redirect to preferences Page
             exit;
         }
     } catch (PDOException $e) {
         $_SESSION['error'] = "Error: " . $e->getMessage();
-        header("Location: pref.php"); // replace with your booking page
+        header("Location: pref.php"); // Error handling , redirect to preferences Page
         exit;
     }
 } else {
     $_SESSION['error'] = "Invalid request. Please make a booking through the booking page.";
-    header("Location: pref.php"); // replace with your booking page
+    header("Location: pref.php"); // Error handling , redirect to preferences Page
     exit;
 }
 ?>

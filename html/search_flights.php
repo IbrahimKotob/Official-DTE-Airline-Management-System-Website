@@ -1,5 +1,5 @@
 <?php
-// search_flights.php
+//back end page for searching for flights
 
 // Database connection
 $servername = "127.0.0.1";

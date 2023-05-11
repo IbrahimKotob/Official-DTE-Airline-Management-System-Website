@@ -6,7 +6,8 @@ function VarExist($var) {
         header("Location: ../admin.html");
     }
 }
-
+//Adming create a flight page
+//creating the variables
 $departureAirport = VarExist($_POST["departure"]);
 $arrivalAirport = VarExist($_POST["destination"]);
 $departureDate = VarExist($_POST["DepartureDate"]);
@@ -17,12 +18,13 @@ $price = VarExist($_POST["price"]);
 
 createFlight($departureAirport, $arrivalAirport, $departureDate, $returnDate, $gate, $aircraft, $price);
 
-
+//create flight function
 function createFlight($departureAirport, $arrivalAirport, $departureDate, $returnDate, $gate, $aircraft, $price) {
     $dbhost = "127.0.0.1";
     $dbname = "dte";
     $dbuser = "root";
     $dbpass = "1234";
+    //access the database
     try {
         $db = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

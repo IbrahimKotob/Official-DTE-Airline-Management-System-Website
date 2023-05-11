@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Flights</title>
+    <!-- styling the flight cards and the rest of the pages -->
     <style>
 body {
     font-family: Arial, sans-serif;
@@ -133,7 +134,7 @@ input[type="submit"]:hover {
             $flights = $_SESSION['flights'];
             unset($_SESSION['flights']); // Clear the session variable
             foreach ($flights as $flight) {
-                echo '<div class="flight-card">';
+                echo '<div class="flight-card">';//displaying flight cards that match the inserted departure and arrival details
                 echo '<a href="pref.PHP?flightID=' . $flight['flightID'] . '">';
                 echo '<h3>Flight ' . $flight['flightID'] . '</h3>';
                 echo '<p>Departure: ' . $flight['origin'] . ' - ' . $flight['departureTime'] . '</p>';

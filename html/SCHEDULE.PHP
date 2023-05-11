@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+<!-- schedule page displaying upcoming flights for user currently logged in -->
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css" href="../css/style.css">
@@ -14,6 +14,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
 <title>Upcoming Flights</title>
+<!-- styling the page and the schedule table that shocases upcoming flights -->
     <style>
        body {
         background-color: #6b52ae;
@@ -114,7 +115,7 @@
 </head>
 <body>
   <div class="header_section">
-		
+		<!-- Menu -->
     <nav class="snip1143">
       <ul>
         <li><a href="index.php" data-hover="Home">Home</a></li>
@@ -127,7 +128,7 @@
 <h1 style="color: white; text-transform: uppercase;font:oblique;">Upcoming Flights</h1>
   <table>
     <thead>
-      <tr>
+      <tr><!-- table holding upcoming flight information -->
         <th>Flight Number</th>
         <th>Departure</th>
         <th>Arrival</th>
@@ -226,7 +227,7 @@ function closeForm(formId) {
         formPopup.remove();
     }
 }
-
+// creating a function to adjust flight details from the upcoming flights table
 function submitForm(event, formId, flightId) {
     event.preventDefault();
 
