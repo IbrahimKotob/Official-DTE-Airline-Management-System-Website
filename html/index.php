@@ -29,13 +29,8 @@ if (isset($_SESSION['email_or_username'])) {
 				<ul>
 				  <li><a href="index.php" data-hover="Home">Home</a></li>
 				  <li><a href="Login.php" data-hover="Schedule">Schedule</a></li>
-<<<<<<< HEAD
-				  <li><a href="login.php" data-hover="Booking">Book A Flight</a></li>
-				  <li><a href="login.php" data-hover="Loyalty Program">Loyalty Program</a></li>
-=======
 				  <li><a href="Booking.html" data-hover="Booking">Book A Flight</a></li>
 				  <li><a href="Loyalty.html" data-hover="Loyalty Program">Loyalty Program</a></li>
->>>>>>> devbranch
 				  <li><a href="login.php" data-hover="LOGIN/REGISTER">LOGIN/REGISTER</a></li>
 				</ul>
 			  </nav>
@@ -45,11 +40,7 @@ if (isset($_SESSION['email_or_username'])) {
 	<div class="banner_section layout_padding">
 	  <div class="container">
 		<h1 class="banner_taital">SkyTrack</h1>
-<<<<<<< HEAD
-		<h2 class="free_text">Your high-flying travel companion. Safe, comfortable, and efficient air travel, from takeoff to landing </h2>
-=======
 		<h2 class="free_text">Your high-flying travel companion. Safe, comfortable, and efficient air travel, from take off to landing. </h2>
->>>>>>> devbranch
 			  <div class="read_bt">
 				<div class="read_text"><a href="ReadMore.html">Read More</a></div>
 			  </div>

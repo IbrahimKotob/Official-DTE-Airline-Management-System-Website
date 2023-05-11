@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
-<<<<<<< HEAD
--- Generation Time: May 11, 2023 at 01:11 AM
-=======
 -- Generation Time: May 11, 2023 at 09:11 PM
->>>>>>> devbranch
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -75,35 +71,6 @@ CREATE TABLE IF NOT EXISTS `airport` (
 -- --------------------------------------------------------
 
 --
-<<<<<<< HEAD
--- Table structure for table `crew_member`
---
-
-DROP TABLE IF EXISTS `crew_member`;
-CREATE TABLE IF NOT EXISTS `crew_member` (
-  `CrewID` int NOT NULL AUTO_INCREMENT,
-  `accountID` int DEFAULT NULL,
-  `FirstName` varchar(255) DEFAULT NULL,
-  `LastName` varchar(255) DEFAULT NULL,
-  `DOB` date DEFAULT NULL,
-  `Age` int DEFAULT NULL,
-  `Email` varchar(255) DEFAULT NULL,
-  `Username` varchar(255) DEFAULT NULL,
-  `Password` varchar(255) DEFAULT NULL,
-  `Address` varchar(255) DEFAULT NULL,
-  `PhoneNumber` varchar(20) DEFAULT NULL,
-  `City` varchar(255) DEFAULT NULL,
-  `Country` varchar(255) DEFAULT NULL,
-  `PostalCode` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`CrewID`),
-  KEY `accountID` (`accountID`)
-) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
-=======
->>>>>>> devbranch
 -- Table structure for table `customer`
 --
 
@@ -123,10 +90,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `Country` varchar(255) DEFAULT NULL,
   `PostalCode` varchar(20) DEFAULT NULL,
   `SpecialNeeds` tinyint(1) DEFAULT NULL,
-<<<<<<< HEAD
-=======
   `Points` int NOT NULL DEFAULT '0',
->>>>>>> devbranch
   PRIMARY KEY (`CustomerID`),
   KEY `accountID` (`accountID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
@@ -167,10 +131,6 @@ CREATE TABLE IF NOT EXISTS `flightreservation` (
   `CustomerID` int DEFAULT NULL,
   `flightID` int DEFAULT NULL,
   `payment Amount` int DEFAULT NULL,
-<<<<<<< HEAD
-  `SpecialNeeds` varchar(255) DEFAULT NULL,
-=======
->>>>>>> devbranch
   `reservation` datetime DEFAULT NULL,
   `Seat` varchar(25) NOT NULL,
   `Accomodation` varchar(25) CHARACTER SET armscii8 COLLATE armscii8_general_ci DEFAULT 'None',
@@ -213,37 +173,6 @@ CREATE TABLE IF NOT EXISTS `person` (
 -- --------------------------------------------------------
 
 --
-<<<<<<< HEAD
--- Table structure for table `pilot`
---
-
-DROP TABLE IF EXISTS `pilot`;
-CREATE TABLE IF NOT EXISTS `pilot` (
-  `PilotID` int NOT NULL AUTO_INCREMENT,
-  `accountID` int DEFAULT NULL,
-  `FlightID` int DEFAULT NULL,
-  `FirstName` varchar(255) DEFAULT NULL,
-  `LastName` varchar(255) DEFAULT NULL,
-  `DOB` date DEFAULT NULL,
-  `Age` int DEFAULT NULL,
-  `Email` varchar(255) DEFAULT NULL,
-  `Username` varchar(255) DEFAULT NULL,
-  `Password` varchar(255) DEFAULT NULL,
-  `Address` varchar(255) DEFAULT NULL,
-  `PhoneNumber` varchar(20) DEFAULT NULL,
-  `City` varchar(255) DEFAULT NULL,
-  `Country` varchar(255) DEFAULT NULL,
-  `PostalCode` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`PilotID`),
-  KEY `accountID` (`accountID`),
-  KEY `FlightID` (`FlightID`)
-) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
-=======
->>>>>>> devbranch
 -- Table structure for table `seat`
 --
 

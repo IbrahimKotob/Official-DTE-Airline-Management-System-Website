@@ -14,59 +14,6 @@ if (isset($_SESSION['email_or_username']) && isset($_SESSION['level'])) {
     }
     exit;
 }
-<<<<<<< HEAD
-
-if (isset($_POST['email_or_username']) && isset($_POST['password'])) {
-    // Retrieve the submitted accountID and password from the form
-    $accountID = $_POST['email_or_username'];
-    $password = $_POST['password'];
-
-    // Database connection parameters
-    $dbhost = "127.0.0.1";
-    $dbname = "dte";
-    $dbuser = "root";
-    $dbpass = "1234";
-
-    try {
-        // Connect to the database
-        $db = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // Prepare the SQL statement to retrieve account information by username or email
-        $stmt = $db->prepare("SELECT Account.*, Person.email FROM Account INNER JOIN Person ON Account.personID = Person.personID WHERE Account.`User name` = :accountID OR Person.email = :accountID");
-        $stmt->bindParam(':accountID', $accountID, PDO::PARAM_STR);
-        $stmt->execute();
-
-        // Check if the account is found
-        if ($stmt->rowCount() > 0) {
-            // Fetch account information
-            $account = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            // Verify the entered password against the password in the database
-            if (password_verify($password, $account['password'])) {
-                // Set session variables
-                $_SESSION['email_or_username'] = $accountID;
-                $_SESSION['level'] = $account['level'];
-
-                // Check account level and redirect accordingly
-                if ($account['level'] === 'Admin') {
-                    header("Location: admin.html");
-                } elseif ($account['level'] === 'Customer') {
-                    header("Location: logged.php");
-                } else {
-                    // Redirect back to the login page with an error message
-                    header("Location: login.html?error=Invalid account level");
-                }
-            } else {
-                // Redirect back to the login page with an error message
-                header("Location: login.html?error=Invalid password");
-            }
-        } else {
-            // Redirect back to the login page with an error message
-            header("Location: login.html?error=Invalid accountID");
-        }
-
-=======
 
 if (isset($_POST['email_or_username']) && isset($_POST['password'])) {
     // Retrieve the submitted accountID and password from the form
@@ -116,18 +63,12 @@ if (password_verify($password, $account['password'])) {
         }
 
 
->>>>>>> devbranch
     } catch (PDOException $e) {
         // Display an error message if there's an issue with the database connection
         echo "Error: " . $e->getMessage();
     }
 }
 ?>
-<<<<<<< HEAD
-
-
-=======
->>>>>>> devbranch
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,17 +86,10 @@ if (password_verify($password, $account['password'])) {
     <nav class="snip1143">
       <ul>
         <li><a href="index.php" data-hover="Home">Home</a></li>
-<<<<<<< HEAD
-        <li><a href="schedule.html" data-hover="Schedule">Schedule</a></li>
-        <li><a href="Booking.html" data-hover="Booking">Book A Flight</a></li>
-        <li><a href="Loyalty.html" data-hover="Loyalty Program">Loyalty Program</a></li>
-        <li><a href="Login.html" data-hover="LOGIN/REGISTER">LOGIN/REGISTER</a></li>
-=======
         <li><a href="schedule.php" data-hover="Schedule">Schedule</a></li>
         <li><a href="Booking.html" data-hover="Booking">Book A Flight</a></li>
         <li><a href="Loyalty.html" data-hover="Loyalty Program">Loyalty Program</a></li>
         <li><a href="Login.php" data-hover="LOGIN/REGISTER">LOGIN/REGISTER</a></li>
->>>>>>> devbranch
       </ul>
       </nav>
   </div>

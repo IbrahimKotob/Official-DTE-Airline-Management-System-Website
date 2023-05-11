@@ -2,12 +2,8 @@
 session_start();
 
 if (!isset($_SESSION['email_or_username'])) {
-<<<<<<< HEAD
-    echo "Failure: Please log in to book a flight";
-=======
     $_SESSION['warning'] = "Please log in to book a flight";
     header("Location: login.html"); // replace with your login page
->>>>>>> devbranch
     exit;
 }
 
@@ -18,15 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $accommodation = $_POST['accommodation'];
     $flightID = $_POST['flightID'];
 
-<<<<<<< HEAD
-    echo "email_or_username: " . $email_or_username . "\n";
-    echo "meal: " . $meal . "\n";
-    echo "seat_type: " . $seat_type . "\n";
-    echo "accommodation: " . $accommodation . "\n";
-    echo "flightID: " . $flightID . "\n";
-
-=======
->>>>>>> devbranch
     // Database connection parameters
     $dbhost = "127.0.0.1";
     $dbname = "dte";
@@ -44,13 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $customer = $stmt->fetch(PDO::FETCH_ASSOC);
         $customerID = $customer['CustomerID'];
-<<<<<<< HEAD
-        $specialNeeds = $customer['SpecialNeeds'];
-
-        echo "customerID: " . $customerID . "\n";
-        echo "specialNeeds: " . $specialNeeds . "\n";
-=======
->>>>>>> devbranch
 
         // Find an available seat matching the selected preferences
         $stmt = $db->prepare("SELECT * FROM seat WHERE flightID = :flightID AND type = :seat_type AND seatClass = :accommodation AND occupied = 0 LIMIT 1");
@@ -63,11 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $seat = $stmt->fetch(PDO::FETCH_ASSOC);
             $seatID = $seat['seatID'];
 
-<<<<<<< HEAD
-            echo "seatID: " . $seatID . "\n";
-
-=======
->>>>>>> devbranch
             // Fetch departure time and price from the flight table using the flightID
             $stmt = $db->prepare("SELECT departureTime, price FROM flight WHERE flightID = :flightID");
             $stmt->bindParam(':flightID', $flightID, PDO::PARAM_INT);
@@ -77,37 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $price = $flightDetails['price'];
             $paymentAmount = $price;
 
-<<<<<<< HEAD
-            echo "departureTime: " . $departureTime . "\n";
-            echo "price: " . $price . "\n";
-            echo "paymentAmount: " . $paymentAmount . "\n";
-              // Mark the seat as occupied
-              $stmt = $db->prepare("UPDATE seat SET occupied = 1 WHERE seatID = :seatID");
-              $stmt->bindParam(':seatID', $seatID, PDO::PARAM_INT);
-              $stmt->execute();
-            // Insert the flight reservation into the database
-            $stmt = $db->prepare("INSERT INTO flightreservation (meals, CustomerID, flightID, `payment Amount`, SpecialNeeds, reservation, Seat, Accomodation) VALUES (:meals, :customerID, :flightID, :paymentAmount, :specialNeeds, :departureTime, :seatID, :accommodation)");
-$stmt->bindParam(':meals', $meal, PDO::PARAM_STR);
-$stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
-$stmt->bindParam(':flightID', $flightID, PDO::PARAM_INT);
-$stmt->bindParam(':paymentAmount', $paymentAmount, PDO::PARAM_INT);
-$stmt->bindParam(':specialNeeds', $specialNeeds, PDO::PARAM_STR);
-$stmt->bindParam(':seatID', $seatID, PDO::PARAM_INT);
-$stmt->bindParam(':departureTime', $departureTime, PDO::PARAM_STR);
-$stmt->bindParam(':accommodation', $accommodation, PDO::PARAM_STR); // Bind the accommodation variable
-$stmt->execute();
-
-echo "Success: Flight reservation successfully created";
-    }} catch (PDOException $e) {
-        // Display an error message if there's an issue with the database connection
-        echo "Failure: " . $e->getMessage();
-    }
-    } else {
-    // Display an error message if the request method is invalid
-    echo "Failure: Invalid request method";
-    }
-    ?>
-=======
             // Mark the seat as occupied
             $stmt = $db->prepare("UPDATE seat SET occupied = 1 WHERE seatID = :seatID");
             $stmt->bindParam(':seatID', $seatID, PDO::PARAM_INT);
@@ -151,4 +95,3 @@ echo "Success: Flight reservation successfully created";
     exit;
 }
 ?>
->>>>>>> devbranch
