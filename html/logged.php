@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
+=======
+	<style>
+		
+	</style>
+>>>>>>> devbranch
 <head>
 
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
@@ -22,7 +28,11 @@
 			<nav class="snip1143">
 				<ul> <?php if (isset($_SESSION['email_or_username'])): ?>
 				  <li><a href="logged.php" data-hover="Home">Home</a></li>
+<<<<<<< HEAD
 				  <li><a href="schedule.html" data-hover="Schedule">Schedule</a></li>
+=======
+				  <li><a href="schedule.PHP" data-hover="Schedule">Schedule</a></li>
+>>>>>>> devbranch
 				  <li><a href="Booking.html" data-hover="Booking">Book A Flight</a></li>
 				  <li><a href="Loyalty.html" data-hover="Loyalty Program">Loyalty Program</a></li>
 				  <li>

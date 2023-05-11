@@ -13,10 +13,12 @@ $departureDate = VarExist($_POST["DepartureDate"]);
 $returnDate = VarExist($_POST["ReturnDate"]);
 $gate = VarExist($_POST["Gate"]);
 $aircraft = VarExist($_POST["aircraft"]);
+$price = VarExist($_POST["price"]);
 
-createFlight($departureAirport, $arrivalAirport, $departureDate, $returnDate, $gate, $aircraft);
+createFlight($departureAirport, $arrivalAirport, $departureDate, $returnDate, $gate, $aircraft, $price);
 
-function createFlight($departureAirport, $arrivalAirport, $departureDate, $returnDate, $gate, $aircraft) {
+
+function createFlight($departureAirport, $arrivalAirport, $departureDate, $returnDate, $gate, $aircraft, $price) {
     $dbhost = "127.0.0.1";
     $dbname = "dte";
     $dbuser = "root";
@@ -42,8 +44,8 @@ function createFlight($departureAirport, $arrivalAirport, $departureDate, $retur
         $arrivalAirportID = $airports[1]['airportID'];
 
         // Insert flight data into the Flight table
-        $queryFlight = "INSERT INTO Flight (departureAirportID, arrivalAirportID, departureTime, returnTime, gate, aircraftID)
-        VALUES (:departureAirportID, :arrivalAirportID, :departureDate, :returnDate, :gate, :aircraft)";
+        $queryFlight = "INSERT INTO Flight (departureAirportID, arrivalAirportID, departureTime, returnTime, gate, aircraftID, price)
+    VALUES (:departureAirportID, :arrivalAirportID, :departureDate, :returnDate, :gate, :aircraft, :price)";
         $stmt = $db->prepare($queryFlight);
         $stmt->bindParam(':departureAirportID', $departureAirportID, PDO::PARAM_INT);
         $stmt->bindParam(':arrivalAirportID', $arrivalAirportID, PDO::PARAM_INT);
@@ -51,6 +53,7 @@ function createFlight($departureAirport, $arrivalAirport, $departureDate, $retur
         $stmt->bindParam(':returnDate', $returnDate);
         $stmt->bindParam(':gate', $gate);
         $stmt->bindParam(':aircraft', $aircraft, PDO::PARAM_INT);
+        $stmt->bindParam(':price', $price, PDO::PARAM_INT);
         $stmt->execute();
 
         header("Location: admin.html");

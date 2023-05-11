@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
+<<<<<<< HEAD
 -- Generation Time: May 11, 2023 at 01:11 AM
+=======
+-- Generation Time: May 11, 2023 at 09:11 PM
+>>>>>>> devbranch
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -71,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `airport` (
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `crew_member`
 --
 
@@ -97,6 +102,8 @@ CREATE TABLE IF NOT EXISTS `crew_member` (
 -- --------------------------------------------------------
 
 --
+=======
+>>>>>>> devbranch
 -- Table structure for table `customer`
 --
 
@@ -116,6 +123,10 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `Country` varchar(255) DEFAULT NULL,
   `PostalCode` varchar(20) DEFAULT NULL,
   `SpecialNeeds` tinyint(1) DEFAULT NULL,
+<<<<<<< HEAD
+=======
+  `Points` int NOT NULL DEFAULT '0',
+>>>>>>> devbranch
   PRIMARY KEY (`CustomerID`),
   KEY `accountID` (`accountID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
@@ -156,7 +167,10 @@ CREATE TABLE IF NOT EXISTS `flightreservation` (
   `CustomerID` int DEFAULT NULL,
   `flightID` int DEFAULT NULL,
   `payment Amount` int DEFAULT NULL,
+<<<<<<< HEAD
   `SpecialNeeds` varchar(255) DEFAULT NULL,
+=======
+>>>>>>> devbranch
   `reservation` datetime DEFAULT NULL,
   `Seat` varchar(25) NOT NULL,
   `Accomodation` varchar(25) CHARACTER SET armscii8 COLLATE armscii8_general_ci DEFAULT 'None',
@@ -199,6 +213,7 @@ CREATE TABLE IF NOT EXISTS `person` (
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Table structure for table `pilot`
 --
 
@@ -227,6 +242,8 @@ CREATE TABLE IF NOT EXISTS `pilot` (
 -- --------------------------------------------------------
 
 --
+=======
+>>>>>>> devbranch
 -- Table structure for table `seat`
 --
 

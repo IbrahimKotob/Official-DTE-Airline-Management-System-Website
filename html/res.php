@@ -2,7 +2,12 @@
 session_start();
 
 if (!isset($_SESSION['email_or_username'])) {
+<<<<<<< HEAD
     echo "Failure: Please log in to book a flight";
+=======
+    $_SESSION['warning'] = "Please log in to book a flight";
+    header("Location: login.html"); // replace with your login page
+>>>>>>> devbranch
     exit;
 }
 
@@ -13,12 +18,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $accommodation = $_POST['accommodation'];
     $flightID = $_POST['flightID'];
 
+<<<<<<< HEAD
     echo "email_or_username: " . $email_or_username . "\n";
     echo "meal: " . $meal . "\n";
     echo "seat_type: " . $seat_type . "\n";
     echo "accommodation: " . $accommodation . "\n";
     echo "flightID: " . $flightID . "\n";
 
+=======
+>>>>>>> devbranch
     // Database connection parameters
     $dbhost = "127.0.0.1";
     $dbname = "dte";
@@ -36,10 +44,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $customer = $stmt->fetch(PDO::FETCH_ASSOC);
         $customerID = $customer['CustomerID'];
+<<<<<<< HEAD
         $specialNeeds = $customer['SpecialNeeds'];
 
         echo "customerID: " . $customerID . "\n";
         echo "specialNeeds: " . $specialNeeds . "\n";
+=======
+>>>>>>> devbranch
 
         // Find an available seat matching the selected preferences
         $stmt = $db->prepare("SELECT * FROM seat WHERE flightID = :flightID AND type = :seat_type AND seatClass = :accommodation AND occupied = 0 LIMIT 1");
@@ -52,8 +63,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $seat = $stmt->fetch(PDO::FETCH_ASSOC);
             $seatID = $seat['seatID'];
 
+<<<<<<< HEAD
             echo "seatID: " . $seatID . "\n";
 
+=======
+>>>>>>> devbranch
             // Fetch departure time and price from the flight table using the flightID
             $stmt = $db->prepare("SELECT departureTime, price FROM flight WHERE flightID = :flightID");
             $stmt->bindParam(':flightID', $flightID, PDO::PARAM_INT);
@@ -63,6 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $price = $flightDetails['price'];
             $paymentAmount = $price;
 
+<<<<<<< HEAD
             echo "departureTime: " . $departureTime . "\n";
             echo "price: " . $price . "\n";
             echo "paymentAmount: " . $paymentAmount . "\n";
@@ -92,3 +107,48 @@ echo "Success: Flight reservation successfully created";
     echo "Failure: Invalid request method";
     }
     ?>
+=======
+            // Mark the seat as occupied
+            $stmt = $db->prepare("UPDATE seat SET occupied = 1 WHERE seatID = :seatID");
+            $stmt->bindParam(':seatID', $seatID, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Insert the flight reservation into the database
+            $stmt = $db->prepare("INSERT INTO flightreservation (meals, CustomerID, flightID, `payment Amount`, reservation, Seat, Accomodation) VALUES (:meals, :customerID, :flightID, :paymentAmount,:departureTime, :seatID, :accommodation)");
+            $stmt->bindParam(':meals', $meal, PDO::PARAM_STR);
+            $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
+            $stmt->bindParam(':flightID', $flightID, PDO::PARAM_INT);
+            $stmt->bindParam(':paymentAmount', $paymentAmount, PDO::PARAM_STR);
+            $stmt->bindParam(':departureTime', $departureTime, PDO::PARAM_STR);
+            $stmt->bindParam(':seatID', $seatID, PDO::PARAM_INT);
+            $stmt->bindParam(':accommodation', $accommodation, PDO::PARAM_STR);
+            $stmt->execute();
+
+            // Calculate points earned from this flight and update customer's points
+            $pointsEarned = $price / 10;  // 1 point for every $10 spent, adjust as needed
+            $newPoints = $customer['Points'] + $pointsEarned;
+            $stmt = $db->prepare("UPDATE Customer SET Points = :newPoints WHERE CustomerID = :customerID");
+            $stmt->bindParam(':newPoints', $newPoints, PDO::PARAM_INT);
+            $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $_SESSION['success'] = "Flight booked successfully!";
+            header("Location: schedule.php"); // replace with your confirmation page
+            exit;
+        } else {
+            $_SESSION['error'] = "No available seats matching your preferences. Please select different options.";
+            header("Location: pref.php"); // replace with your booking page
+            exit;
+        }
+    } catch (PDOException $e) {
+        $_SESSION['error'] = "Error: " . $e->getMessage();
+        header("Location: pref.php"); // replace with your booking page
+        exit;
+    }
+} else {
+    $_SESSION['error'] = "Invalid request. Please make a booking through the booking page.";
+    header("Location: pref.php"); // replace with your booking page
+    exit;
+}
+?>
+>>>>>>> devbranch
