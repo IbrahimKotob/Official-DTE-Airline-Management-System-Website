@@ -41,6 +41,6 @@ session_start();
 $_SESSION['flights'] = $flights;
 
 // Redirect to the HTML page
-header("Location: pref.php");
+header("Location: pick.php");
 exit();
 ?>

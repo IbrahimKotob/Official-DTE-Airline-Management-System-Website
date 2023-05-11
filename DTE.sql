@@ -1,204 +1,248 @@
--- Create Seat table
-CREATE TABLE Seat (
-  seatID INT PRIMARY KEY,
-  flightID INT,
-  type VARCHAR(255),
-  seatClass VARCHAR(50),
-  seatNumber VARCHAR(10),
-  occupied BOOLEAN,
-  FOREIGN KEY (flightID) REFERENCES Flight(flightID)
-);
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: May 11, 2023 at 01:11 AM
+-- Server version: 8.0.31
+-- PHP Version: 8.0.26
 
--- Create Payment table
-CREATE TABLE Payment (
-  paymentID INT AUTO_INCREMENT PRIMARY KEY,
-  fee DECIMAL(10, 2),
-  status VARCHAR(50)
-);
--- Create Notifications table
-CREATE TABLE Notifications (
-  id INT PRIMARY KEY,
-  date DATE,
-  content VARCHAR(255),
-  accountID INT,
-  FOREIGN KEY (accountID) REFERENCES Account(PersonID)
-);
-CREATE TABLE Flight (
-  flightID INT AUTO_INCREMENT  PRIMARY KEY,
-  departureAirportID INT,
-  arrivalAirportID INT,
-  departureTime DATETIME,
-  returnTime DATETIME,
-  gate VARCHAR(20),
-  status VARCHAR(50),
-  aircraftID INT,
-  pilotID INT,
-  Co-PilotID INT,
-  FOREIGN KEY (departureAirportID) REFERENCES Airport(airportID),
-  FOREIGN KEY (arrivalAirportID) REFERENCES Airport(airportID),
-  FOREIGN KEY (aircraftID) REFERENCES Aircraft(aircraftID)
-);
--- Create Aircraft table
-CREATE TABLE Aircraft (
-  aircraftID INT PRIMARY KEY,
-  name VARCHAR(255),
-  model VARCHAR(255),
-  manufacturingYear INT
-);
--- Create Airport table
-CREATE TABLE Airport (
-  airportID INT PRIMARY KEY,
-  name VARCHAR(255),
-  address VARCHAR(255)
-);
-
--- Create FlightReservation table
-CREATE TABLE FlightReservation (
-  reservationNumber INT PRIMARY KEY,
-  meals VARCHAR(255),
-  CustomerID INT,
-  flightID INT,
-  seatID INT,
-  paymentID INT,
- SpecialNeeds  BOOLEAN,
-  reservation DATETIME,
-  FOREIGN KEY (CustomerID) REFERENCES Customer(customerID),
-  FOREIGN KEY (flightID) REFERENCES Flight(flightID),
-  FOREIGN KEY (seatID) REFERENCES Seat(seatID),
-  FOREIGN KEY (paymentID) REFERENCES Payment(paymentID)
-);
--- Create Person table
-CREATE TABLE Person (
-  personID INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255),
-  address VARCHAR(255),
-  email VARCHAR(255),
-  phone VARCHAR(20)
-);
-
--- Create Account table
-CREATE TABLE Account (
-  accountID INT AUTO_INCREMENT PRIMARY KEY,
-  personID INT,
-  password VARCHAR(255),
-  status VARCHAR(50),
-  level VARCHAR(50),
-  FOREIGN KEY (personID) REFERENCES Person(personID)
-);
-CREATE TABLE Pilot (
-  PilotID INT AUTO_INCREMENT PRIMARY KEY,
-  accountID INT ,
-  FlightID INT,
-   FirstName VARCHAR(255),
-    LastName VARCHAR(255),
-    DOB DATE,
-    Age INT,
-    Email VARCHAR(255),
-    Username VARCHAR(255),
-    Password VARCHAR(255),
-    Address VARCHAR(255),
-    PhoneNumber VARCHAR(20),
-    City VARCHAR(255),
-    Country VARCHAR(255),
-    PostalCode VARCHAR(20),
-  FOREIGN KEY (accountID) REFERENCES Account(AccountID),
-  FOREIGN KEY (FlightID) REFERENCES Flight(FlightID)
-);
-CREATE TABLE Crew_Member (
-    CrewID INT AUTO_INCREMENT PRIMARY KEY,
-  accountID INT ,
-  FlightID INT,
-   FirstName VARCHAR(255),
-    LastName VARCHAR(255),
-    DOB DATE,
-    Age INT,
-    Email VARCHAR(255),
-    Username VARCHAR(255),
-    Password VARCHAR(255),
-    Address VARCHAR(255),
-    PhoneNumber VARCHAR(20),
-    City VARCHAR(255),
-    Country VARCHAR(255),
-    PostalCode VARCHAR(20),
-  FOREIGN KEY (accountID) REFERENCES Account(AccountID),
-  FOREIGN KEY (FlightID) REFERENCES Flight(FlightID)
-);
-CREATE TABLE Customer (
-    CustomerID INT AUTO_INCREMENT PRIMARY KEY,
-      accountID INT ,
-    FirstName VARCHAR(255),
-    LastName VARCHAR(255),
-    DOB DATE,
-    Age INT,
-    Email VARCHAR(255),
-    Username VARCHAR(255),
-    Password VARCHAR(255),
-    Address VARCHAR(255),
-    PhoneNumber VARCHAR(20),
-    City VARCHAR(255),
-    Country VARCHAR(255),
-    PostalCode VARCHAR(20),
-    SpecialNeeds BOOLEAN NULL,
-     FOREIGN KEY (accountID) REFERENCES Account(AccountID)
-);
-
--- Grant SELECT privilege to Pilot and Crew to viewAssignedFlight
-GRANT SELECT ON Flight TO Pilot;
-GRANT SELECT ON Flight TO Crew;
-
--- Grant DELETE, INSERT, UPDATE privileges to Admin for various actions
-GRANT DELETE ON Flight TO Admin;
-GRANT INSERT ON Flight TO Admin;
-GRANT UPDATE(departureTime) ON Flight TO Admin;
-GRANT UPDATE(gate, status, aircraft) ON Flight TO Admin;
-GRANT UPDATE(pilotID) ON Flight TO Admin;
-GRANT UPDATE(crewID) ON Flight TO Admin;
-
--- Grant EXECUTE privilege to Admin for assignPilot and assignCrew procedures
-GRANT EXECUTE ON FUNCTION assignPilot TO Admin;
-GRANT EXECUTE ON FUNCTION assignCrew TO Admin;
-
--- Grant ALL privileges to Admin for editing flight
-GRANT ALL ON Flight TO Admin;
-
--- Grant INSERT privilege to FrontDeskOfficer to createReservation
-GRANT INSERT ON FlightReservation TO FrontDeskOfficer;
-
--- Grant SELECT privilege to FrontDeskOfficer to viewAvailableSeats
-GRANT SELECT ON Seat TO FrontDeskOfficer;
-
--- Grant UPDATE privilege to FrontDeskOfficer to processPayment
-GRANT UPDATE ON FlightReservation TO FrontDeskOfficer;
-
--- Grant EXECUTE privilege to FrontDeskOfficer for printTicket procedure
-GRANT EXECUTE ON FUNCTION printTicket TO FrontDeskOfficer;
-
--- Grant SELECT privilege to Customer to getReservation
-GRANT SELECT ON FlightReservation TO Customer;
-
--- Grant INSERT privilege to Customer to bookFlight
-GRANT INSERT ON FlightReservation TO Customer;
-
--- Grant EXECUTE privilege to Customer for makePayment procedure
-GRANT EXECUTE ON FUNCTION makePayment TO Customer;
--- Create a trigger to enforce capacity constraint
-CREATE TRIGGER check_capacity
-BEFORE INSERT ON FlightReservation
-FOR EACH ROW
-BEGIN
-    DECLARE flight_capacity INT;
-    
-    -- Get the capacity of the flight being reserved
-    SELECT capacity INTO flight_capacity
-    FROM Flight
-    WHERE flightID = NEW.flightID;
-    
-    -- Check if the flight capacity is greater than 50
-    IF flight_capacity <= 50 THEN
-        -- Raise an error if capacity constraint is violated
-        SIGNAL SQLSTATE '45000'
-            SET MESSAGE_TEXT = 'Flight capacity must be greater than 50 to allow reservations.';
-    END IF;
-END;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `dte`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `account`
+--
+
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE IF NOT EXISTS `account` (
+  `accountID` int NOT NULL AUTO_INCREMENT,
+  `personID` int DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET armscii8 COLLATE armscii8_general_ci DEFAULT 'Active',
+  `level` varchar(50) CHARACTER SET armscii8 COLLATE armscii8_general_ci DEFAULT 'Customer',
+  `User name` varchar(25) NOT NULL,
+  PRIMARY KEY (`accountID`),
+  KEY `personID` (`personID`)
+) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aircraft`
+--
+
+DROP TABLE IF EXISTS `aircraft`;
+CREATE TABLE IF NOT EXISTS `aircraft` (
+  `aircraftID` int NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `model` varchar(255) DEFAULT NULL,
+  `manufacturingYear` int DEFAULT NULL,
+  PRIMARY KEY (`aircraftID`)
+) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `airport`
+--
+
+DROP TABLE IF EXISTS `airport`;
+CREATE TABLE IF NOT EXISTS `airport` (
+  `airportID` int NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`airportID`)
+) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `crew_member`
+--
+
+DROP TABLE IF EXISTS `crew_member`;
+CREATE TABLE IF NOT EXISTS `crew_member` (
+  `CrewID` int NOT NULL AUTO_INCREMENT,
+  `accountID` int DEFAULT NULL,
+  `FirstName` varchar(255) DEFAULT NULL,
+  `LastName` varchar(255) DEFAULT NULL,
+  `DOB` date DEFAULT NULL,
+  `Age` int DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `Username` varchar(255) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL,
+  `Address` varchar(255) DEFAULT NULL,
+  `PhoneNumber` varchar(20) DEFAULT NULL,
+  `City` varchar(255) DEFAULT NULL,
+  `Country` varchar(255) DEFAULT NULL,
+  `PostalCode` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`CrewID`),
+  KEY `accountID` (`accountID`)
+) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE IF NOT EXISTS `customer` (
+  `CustomerID` int NOT NULL AUTO_INCREMENT,
+  `accountID` int DEFAULT NULL,
+  `FirstName` varchar(255) DEFAULT NULL,
+  `LastName` varchar(255) DEFAULT NULL,
+  `DOB` date DEFAULT NULL,
+  `Age` int DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL,
+  `Address` varchar(255) DEFAULT NULL,
+  `PhoneNumber` varchar(20) DEFAULT NULL,
+  `City` varchar(255) DEFAULT NULL,
+  `Country` varchar(255) DEFAULT NULL,
+  `PostalCode` varchar(20) DEFAULT NULL,
+  `SpecialNeeds` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`CustomerID`),
+  KEY `accountID` (`accountID`)
+) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `flight`
+--
+
+DROP TABLE IF EXISTS `flight`;
+CREATE TABLE IF NOT EXISTS `flight` (
+  `flightID` int NOT NULL AUTO_INCREMENT,
+  `departureAirportID` int DEFAULT NULL,
+  `arrivalAirportID` int DEFAULT NULL,
+  `departureTime` datetime DEFAULT NULL,
+  `returnTime` datetime DEFAULT NULL,
+  `gate` varchar(20) DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET armscii8 COLLATE armscii8_general_ci DEFAULT 'Active',
+  `aircraftID` int DEFAULT NULL,
+  `price` int NOT NULL,
+  PRIMARY KEY (`flightID`),
+  KEY `departureAirportID` (`departureAirportID`),
+  KEY `arrivalAirportID` (`arrivalAirportID`),
+  KEY `aircraftID` (`aircraftID`)
+) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `flightreservation`
+--
+
+DROP TABLE IF EXISTS `flightreservation`;
+CREATE TABLE IF NOT EXISTS `flightreservation` (
+  `reservationNumber` int NOT NULL AUTO_INCREMENT,
+  `meals` varchar(255) DEFAULT NULL,
+  `CustomerID` int DEFAULT NULL,
+  `flightID` int DEFAULT NULL,
+  `payment Amount` int DEFAULT NULL,
+  `SpecialNeeds` varchar(255) DEFAULT NULL,
+  `reservation` datetime DEFAULT NULL,
+  `Seat` varchar(25) NOT NULL,
+  `Accomodation` varchar(25) CHARACTER SET armscii8 COLLATE armscii8_general_ci DEFAULT 'None',
+  PRIMARY KEY (`reservationNumber`),
+  KEY `CustomerID` (`CustomerID`),
+  KEY `flightID` (`flightID`),
+  KEY `paymentID` (`payment Amount`)
+) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+DROP TABLE IF EXISTS `payment`;
+CREATE TABLE IF NOT EXISTS `payment` (
+  `paymentID` int NOT NULL AUTO_INCREMENT,
+  `fee` decimal(10,2) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`paymentID`)
+) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `person`
+--
+
+DROP TABLE IF EXISTS `person`;
+CREATE TABLE IF NOT EXISTS `person` (
+  `personID` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`personID`)
+) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pilot`
+--
+
+DROP TABLE IF EXISTS `pilot`;
+CREATE TABLE IF NOT EXISTS `pilot` (
+  `PilotID` int NOT NULL AUTO_INCREMENT,
+  `accountID` int DEFAULT NULL,
+  `FlightID` int DEFAULT NULL,
+  `FirstName` varchar(255) DEFAULT NULL,
+  `LastName` varchar(255) DEFAULT NULL,
+  `DOB` date DEFAULT NULL,
+  `Age` int DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `Username` varchar(255) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL,
+  `Address` varchar(255) DEFAULT NULL,
+  `PhoneNumber` varchar(20) DEFAULT NULL,
+  `City` varchar(255) DEFAULT NULL,
+  `Country` varchar(255) DEFAULT NULL,
+  `PostalCode` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`PilotID`),
+  KEY `accountID` (`accountID`),
+  KEY `FlightID` (`FlightID`)
+) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `seat`
+--
+
+DROP TABLE IF EXISTS `seat`;
+CREATE TABLE IF NOT EXISTS `seat` (
+  `seatID` int NOT NULL,
+  `flightID` int DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET armscii8 COLLATE armscii8_general_ci DEFAULT 'None',
+  `seatClass` varchar(50) DEFAULT NULL,
+  `seatNumber` varchar(10) DEFAULT NULL,
+  `occupied` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`seatID`),
+  KEY `flightID` (`flightID`)
+) ENGINE=MyISAM DEFAULT CHARSET=armscii8;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
