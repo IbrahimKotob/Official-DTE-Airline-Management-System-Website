@@ -153,8 +153,7 @@ color: #fff;
 	text-align: center;
 	color: #440072e4;
 	font-size: 300%;
-	animation: swing; /* referring directly to the animation's @keyframe declaration */
-  animation-duration: 2s; /* don't forget to set a duration! */
+
   }
    
   tr:nth-child(even) {
@@ -164,3 +163,10 @@ color: #fff;
   tr:hover {
     background-color: #ddd;
   }
+img{
+	width: 250px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	
+}

@@ -112,8 +112,7 @@ body {
    
    text-shadow: #4b0082;
    font:italic;
-  animation: tada; /* referring directly to the animation's @keyframe declaration */
-  animation-duration: 2s; /* don't forget to set a duration! */
+
   }
  
   @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
