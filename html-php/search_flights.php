@@ -1,11 +1,8 @@
 <?php
-//back end page for searching for flights
-
-// Database connection
-$servername = "127.0.0.1";
-$username = "root";
-$password = "1234";
-$dbname = "dte";
+$dbhost = "localhost";
+$dbname = "id20739167_dte";
+$dbuser = "id20739167_root";
+$dbpass = "=U#Wq|Yfvtd2nd>r";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -19,7 +16,6 @@ $to = $_POST['to'];
 $departure = $_POST['departure'];
 $return = $_POST['return'];
 
-// Use placeholders and prepared statements for better security
 $sql = "SELECT f.flightID, a1.name as origin, a2.name as destination, f.departureTime, f.returnTime
         FROM Flight f
         JOIN Airport a1 ON f.departureAirportID = a1.airportID
@@ -36,11 +32,11 @@ $flights = $result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 $conn->close();
 
-// Store the flights in a session variable
+
 session_start();
 $_SESSION['flights'] = $flights;
 
-// Redirect to the HTML page
+
 header("Location: pick.php");
 exit();
 ?>

@@ -20,11 +20,11 @@ createFlight($departureAirport, $arrivalAirport, $departureDate, $returnDate, $g
 
 //create flight function
 function createFlight($departureAirport, $arrivalAirport, $departureDate, $returnDate, $gate, $aircraft, $price) {
-    $dbhost = "127.0.0.1";
-    $dbname = "dte";
-    $dbuser = "root";
-    $dbpass = "1234";
-    //access the database
+    $dbhost = "localhost";
+    $dbname = "id20739167_dte";
+    $dbuser = "id20739167_root";
+    $dbpass = "=U#Wq|Yfvtd2nd>r";
+     //access the database
     try {
         $db = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -32,7 +32,6 @@ function createFlight($departureAirport, $arrivalAirport, $departureDate, $retur
         print "Error!: " . $e->getMessage() . "<br/>";
         die();
     }
-
     // Check if departure and arrival airports exist in the Airport table and are not the same
     $query = "SELECT airportID, name FROM Airport WHERE name = :departureAirport OR name = :arrivalAirport";
     $stmt = $db->prepare($query);
@@ -45,7 +44,8 @@ function createFlight($departureAirport, $arrivalAirport, $departureDate, $retur
         $departureAirportID = $airports[0]['airportID'];
         $arrivalAirportID = $airports[1]['airportID'];
 
-        // Insert flight data into the Flight table
+          // Insert flight data into the Flight table
+
         $queryFlight = "INSERT INTO Flight (departureAirportID, arrivalAirportID, departureTime, returnTime, gate, aircraftID, price)
     VALUES (:departureAirportID, :arrivalAirportID, :departureDate, :returnDate, :gate, :aircraft, :price)";
         $stmt = $db->prepare($queryFlight);
@@ -60,7 +60,8 @@ function createFlight($departureAirport, $arrivalAirport, $departureDate, $retur
 
         header("Location: admin.html");
     } else {
-        // Handle error: airports do not exist or are the same
+               // Handle error: airports do not exist or are the same
+
         echo "Error: Departure and arrival airports must exist in the Airport table and must not be the same.";
     }
 }

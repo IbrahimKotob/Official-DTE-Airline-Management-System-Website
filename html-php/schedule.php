@@ -1,7 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION['email_or_username'])) {
+
+  echo "Session not set";
+  exit;}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- schedule page displaying upcoming flights for user currently logged in -->
+
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css" href="../css/style.css">
@@ -15,6 +23,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
 <title>Upcoming Flights</title>
 <!-- styling the page and the schedule table that shocases upcoming flights -->
+
     <style>
        body {
         background-color: #6b52ae;
@@ -115,7 +124,8 @@
 </head>
 <body>
   <div class="header_section">
-		<!-- Menu -->
+				<!-- Menu -->
+
     <nav class="snip1143">
       <ul>
         <li><a href="index.php" data-hover="Home">Home</a></li>
@@ -139,42 +149,47 @@
     <tbody>
    
     <?php
-session_start();
+    // Database connection parameters
 
-// Database connection parameters
-$dbhost = "127.0.0.1";
-$dbname = "dte";
-$dbuser = "root";
-$dbpass = "1234";
+$dbhost = "localhost";
+$dbname = "id20739167_dte";
+$dbuser = "id20739167_root";
+$dbpass = "=U#Wq|Yfvtd2nd>r";
 
 try {
-    // Connect to the database
+      // Connect to the database
+
     $db = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Get the email or username from the session
+     // Get the email or username from the session
+
     $email_or_username = $_SESSION['email_or_username'];
 
-    // Prepare the SQL statement to get the customerID for this user
-    $stmt = $db->prepare("SELECT CustomerID FROM customer INNER JOIN account ON customer.accountID = account.accountID INNER JOIN person ON account.personID = person.personID WHERE account.`User name` = :email_or_username OR person.email = :email_or_username");
+       // Prepare the SQL statement to get the customerID for this user
+
+    $stmt = $db->prepare("SELECT CustomerID FROM Customer INNER JOIN Account ON Customer.accountID = Account.accountID INNER JOIN Person ON Account.personID = Person.personID WHERE Account.`User name` = :email_or_username OR Person.email = :email_or_username");
     $stmt->bindParam(':email_or_username', $email_or_username, PDO::PARAM_STR);
     $stmt->execute();
-
     // Fetch the customerID
+
     $customerID = $stmt->fetchColumn();
 
     if ($customerID === false) {
         throw new Exception('No customerID found for this user');
     }
 // Prepare the SQL statement to get the flight reservations for this customer
-$stmt = $db->prepare("SELECT flightreservation.*, flight.*, depart_airport.name as departure_airport_name, depart_airport.address as departure_airport_address, arrival_airport.name as arrival_airport_name, arrival_airport.address as arrival_airport_address FROM flightreservation INNER JOIN flight ON flight.flightID = flightreservation.flightID INNER JOIN airport as depart_airport ON flight.departureAirportID = depart_airport.airportID INNER JOIN airport as arrival_airport ON flight.arrivalAirportID = arrival_airport.airportID WHERE flightreservation.CustomerID = :customerID");
+
+$stmt = $db->prepare("SELECT Flightreservation.*, Flight.*, depart_airport.name as departure_airport_name, depart_airport.address as departure_airport_address, arrival_airport.name as arrival_airport_name, arrival_airport.address as arrival_airport_address FROM Flightreservation INNER JOIN Flight ON Flight.flightID = Flightreservation.flightID INNER JOIN Airport as depart_airport ON Flight.departureAirportID = depart_airport.airportID INNER JOIN Airport as arrival_airport ON Flight.arrivalAirportID = arrival_airport.airportID WHERE Flightreservation.CustomerID = :customerID");
 $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
 $stmt->execute();
 
 // Fetch all the flight reservations
+
 $flightReservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Loop through the flight reservations and output the table rows
+
 foreach ($flightReservations as $flightReservation) {
   echo "<tr>";
   echo "<td>{$flightReservation['flightID']}</td>";
@@ -185,10 +200,10 @@ foreach ($flightReservations as $flightReservation) {
   echo "</tr>";
 }
 } catch (PDOException $e) {
-    // Display an error message if there's an issue with the database connection
+ 
     echo "Error: " . $e->getMessage();
 } catch (Exception $e) {
-    // Display an error message if no customerID found
+   
     echo "Error: " . $e->getMessage();
 }
 ?>
@@ -196,7 +211,7 @@ foreach ($flightReservations as $flightReservation) {
 </html>
   <script>
 		function openForm(formId, flightId) {
-    // Create the form and add it to the page
+
     var form = document.createElement("div");
     form.setAttribute("id", formId + flightId);
     form.setAttribute("class", "form-popup");
@@ -205,35 +220,33 @@ foreach ($flightReservations as $flightReservation) {
     html += '<h2>Adjust Flight Details for Flight ' + flightId + '</h2>';
     html += '<label for="meal">Meal:</label>';
     html += '<select id="meal" name="meal"><option value="Vegetarian">Vegetarian</option><option value="Gluten-free">Gluten-free</option><option value="Kosher">Kosher</option><option value="Standard">Standard</option></select>';
-    html += '<label for="seat-type">Seat Type:</label>';
-    html += '<select id="seat-type" name="seat-type"><option value="economy">Economy</option><option value="Premium-economy">Premium Economy</option><option value="business">Business</option><option value="first-class">First Class</option></select>';
     html += '<button type="submit">Save Changes</button>';
     html += '</form>';
     form.innerHTML = html;
     document.body.appendChild(form);
 
-    // Display the form
+ 
     document.getElementById(formId + flightId).style.display = "block";
 }
 function closeForm(formId) {
-    // Get the form popup element by id
+   
     var formPopup = document.getElementById(formId);
 
-    // Hide the form popup
+
     if (formPopup) {
         formPopup.style.display = "none";
 
-        // Remove the form from the DOM
+        
         formPopup.remove();
     }
 }
-// creating a function to adjust flight details from the upcoming flights table
+
 function submitForm(event, formId, flightId) {
     event.preventDefault();
 
     var form = document.getElementById("adjust-form");
     var formData = new FormData(form);
-
+    formData.append("flightId", flightId);
     fetch("adjust_flight.php", {
         method: "POST",
         body: formData

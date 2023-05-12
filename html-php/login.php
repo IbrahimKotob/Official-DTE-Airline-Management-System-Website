@@ -1,70 +1,81 @@
 <?php
 session_start();
-
 // Check if the user is already logged in
 if (isset($_SESSION['email_or_username']) && isset($_SESSION['level'])) {
-    // Check account level and redirect accordingly
+      // Check account level and redirect accordingly
+
     if ($_SESSION['level'] === 'Admin') {
         header("Location: admin.html");
     } elseif ($_SESSION['level'] === 'Customer') {
         header("Location: logged.php");
     } else {
-        // Redirect back to the login page with an error message
+                // Redirect back to the login page with an error message
+
         header("Location: login.html?error=Invalid account level");
     }
     exit;
 }
 
 if (isset($_POST['email_or_username']) && isset($_POST['password'])) {
-    // Retrieve the submitted accountID and password from the form
+       // Retrieve the submitted accountID and password from the form
+
     $accountID = $_POST['email_or_username'];
     $password = $_POST['password'];
-
     // Database connection parameters
-    $dbhost = "127.0.0.1";
-    $dbname = "dte";
-    $dbuser = "root";
-    $dbpass = "1234";
+
+    $dbhost = "localhost";
+    $dbname = "id20739167_dte";
+    $dbuser = "id20739167_root";
+    $dbpass = "=U#Wq|Yfvtd2nd>r";
 
     try {
-        // Connect to the database
+                // Connect to the database
+
         $db = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Prepare the SQL statement to retrieve account information by username or email
+               // Prepare the SQL statement to retrieve account information by username or email
+
         $stmt = $db->prepare("SELECT Account.*, Person.email FROM Account INNER JOIN Person ON Account.personID = Person.personID WHERE Account.`User name` = :accountID OR Person.email = :accountID");
         $stmt->bindParam(':accountID', $accountID, PDO::PARAM_STR);
         $stmt->execute();
-
         // Check if the account is found
-        if ($stmt->rowCount() > 0) {
-            // Fetch account information
-            $account = $stmt->fetch(PDO::FETCH_ASSOC);
 
+       
+        if ($stmt->rowCount() > 0) {
+                      // Fetch account information
+
+            $account = $stmt->fetch(PDO::FETCH_ASSOC);
             // Verify the entered password against the password in the database
-           // ...
+
+           
 if (password_verify($password, $account['password'])) {
-    // Check account level and redirect accordingly
+     // Check account level and redirect accordingly
+
     if ($account['level'] === 'Admin') {
         header("Location: admin.html");
     } elseif ($account['level'] === 'Customer') {
-        // Set session variables only for customers
+            // Set session variables only for customers
+
         $_SESSION['email_or_username'] = $accountID;
         $_SESSION['level'] = $account['level'];
         header("Location: logged.php");
     } else {
-        // Redirect back to the login page with an error message
+               // Redirect back to the login page with an error message
+
         header("Location: login.html?error=Invalid account level");
     }
 } else {
-    // Redirect back to the login page with an error message
+        // Redirect back to the login page with an error message
+
     header("Location: login.html?error=Invalid password");
 }
         }
 
 
     } catch (PDOException $e) {
-        // Display an error message if there's an issue with the database connection
+               // Display an error message if there's an issue with the database connection
+
         echo "Error: " . $e->getMessage();
     }
 }
@@ -80,22 +91,21 @@ if (password_verify($password, $account['password'])) {
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
-<body style="background-image: url(../images/airplane-pastel-purple-background-3d-render_576429-695.png);">
+<body style="background-image: url(../images/airplane-pastel-purple-background-3d-render_576429-695.png)">
 	<div class="header_section">
 		
     <nav class="snip1143">
       <ul><!-- menu -->
         <li><a href="index.php" data-hover="Home">Home</a></li>
-        <li><a href="schedule.php" data-hover="Schedule">Schedule</a></li>
-        <li><a href="Booking.html" data-hover="Booking">Book A Flight</a></li>
         <li><a href="Loyalty.html" data-hover="Loyalty Program">Loyalty Program</a></li>
-        <li><a href="Login.php" data-hover="LOGIN/REGISTER">LOGIN/REGISTER</a></li>
+     
       </ul>
       </nav>
   </div>
 </div>
+<!-- form to input the login credentials -->
 <div class="container">
-    <div class="screen"><!-- form to input the login credentials -->
+    <div class="screen">
         <div class="screen__content">
             <form class="login" action="login.php" method="POST">
                 <div class="login__field">
@@ -135,6 +145,16 @@ if (password_verify($password, $account['password'])) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
 
 
 

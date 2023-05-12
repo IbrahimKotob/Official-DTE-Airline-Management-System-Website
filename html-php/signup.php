@@ -1,5 +1,6 @@
 <?php
 //Backend for the sign-up page
+
 function VarExist($var) {
     if (isset($var)) {
         return $var;
@@ -10,6 +11,7 @@ function VarExist($var) {
 
 $user = new stdClass();
 //creating variables for the user that hold the information entered by the user in the form in the signup html page
+
 $user->firstName = VarExist($_POST["firstName"]);
 $user->lastName = VarExist($_POST["lastName"]);
 $user->email = VarExist($_POST["email"]);
@@ -42,10 +44,10 @@ function InsertUserToDBfromObject($user) {
     $age = $birthdate->diff($today)->y;
     $formattedBirthdate = $birthdate->format('Y-m-d');
 
-    $dbhost = "127.0.0.1";
-    $dbname = "dte";
-    $dbuser = "root";
-    $dbpass = "1234";
+    $dbhost = "localhost";
+    $dbname = "id20739167_dte";
+    $dbuser = "id20739167_root";
+    $dbpass = "=U#Wq|Yfvtd2nd>r";
     $db = null;
 
     try {
@@ -85,7 +87,8 @@ function InsertUserToDBfromObject($user) {
 
     header("Location: login.php");
     }
-    //function to insert the user to the database along with all the information entered by the user, thus creating a unique account
+        //function to insert the user to the database along with all the information entered by the user, thus creating a unique account
+
     function InsertUserToDBfromArray($user){
     print_r($user);
     }

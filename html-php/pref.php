@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (isset($_SESSION['warning'])) {
     echo "<div class='warning'>" . $_SESSION['warning'] . "</div>";
     unset($_SESSION['warning']);
@@ -6,12 +7,12 @@ if (isset($_SESSION['warning'])) {
 ?>
 
 <?php
-session_start();
 
-$dbhost = "127.0.0.1";
-$dbname = "dte";
-$dbuser = "root";
-$dbpass = "1234";
+
+$dbhost = "localhost";
+$dbname = "id20739167_dte";
+$dbuser = "id20739167_root";
+$dbpass = "=U#Wq|Yfvtd2nd>r";
 
 $specialNeeds = "";
 
@@ -19,11 +20,13 @@ if (isset($_SESSION['email_or_username'])) {
     $username_or_email = $_SESSION['email_or_username'];
 
     try {
-        // Connect to the database
+                // Connect to the database
+
         $db = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Prepare the SQL statement to retrieve accountID by username or email
+                // Prepare the SQL statement to retrieve accountID by username or email
+
         $stmt = $db->prepare("SELECT Account.accountID FROM Account INNER JOIN Person ON Account.personID = Person.personID WHERE Account.`User name` = :username_or_email OR Person.email = :username_or_email");
         $stmt->bindParam(':username_or_email', $username_or_email, PDO::PARAM_STR);
         $stmt->execute();
@@ -32,7 +35,8 @@ if (isset($_SESSION['email_or_username'])) {
             $account = $stmt->fetch(PDO::FETCH_ASSOC);
             $accountID = $account['accountID'];
 
-            // Prepare the SQL statement to retrieve SpecialNeeds by accountID
+                     // Prepare the SQL statement to retrieve SpecialNeeds by accountID
+
             $stmt = $db->prepare("SELECT Customer.SpecialNeeds FROM Customer WHERE Customer.accountID = :accountID");
             $stmt->bindParam(':accountID', $accountID, PDO::PARAM_INT);
             $stmt->execute();
@@ -61,7 +65,8 @@ if (isset($_SESSION['email_or_username'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Flights</title>
-    <!-- styling the page and the pop-up menu allowing for further flight customization -->
+        <!-- styling the page and the pop-up menu allowing for further flight customization -->
+
     <style>
         body {
             font-family: Arial, sans-serif;

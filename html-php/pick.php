@@ -1,10 +1,12 @@
+<?php
+        session_start();?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Flights</title>
-    <!-- styling the flight cards and the rest of the pages -->
     <style>
 body {
     font-family: Arial, sans-serif;
@@ -129,13 +131,12 @@ input[type="submit"]:hover {
     </header>
     <div class="container">
     <?php
-        session_start();
         if (isset($_SESSION['flights'])) {
             $flights = $_SESSION['flights'];
             unset($_SESSION['flights']); // Clear the session variable
             foreach ($flights as $flight) {
-                echo '<div class="flight-card">';//displaying flight cards that match the inserted departure and arrival details
-                echo '<a href="pref.PHP?flightID=' . $flight['flightID'] . '">';
+                echo '<div class="flight-card">';
+                echo '<a href="pref.php?flightID=' . $flight['flightID'] . '">';
                 echo '<h3>Flight ' . $flight['flightID'] . '</h3>';
                 echo '<p>Departure: ' . $flight['origin'] . ' - ' . $flight['departureTime'] . '</p>';
                 echo '<p>Arrival: ' . $flight['destination'] . ' - ' . $flight['returnTime'] . '</p>';
